@@ -29,6 +29,10 @@ server.on('request', (req, res) => {
           res.end('something went wrong');
         }
       });
+
+      req.on('aborted', () => {
+        rs.destroy();
+      });
       
       break;
 
