@@ -26,12 +26,13 @@ server.on('request', (req, res) => {
         setResponse(res, 500, `unknown error: ${err.message}`);
       });
 
-      if (fs.existsSync(filepath)) {
-        fs.unlinkSync(filepath);
+      fs.unlink(filepath, (err) => {
+        if(err) {
+          setResponse(res, 404, `there is no file '${pathname}'`);
+          return;
+        }
         setResponse(res, 200, `file '${pathname}' has been deleted`);
-      } else {
-        setResponse(res, 404, `there is no file '${pathname}'`);
-      }
+      });
 
       break;
 
