@@ -27,7 +27,7 @@ router.post('/publish', async (ctx, next) => {
     }
 
     clients.forEach(resolve => resolve(message));
-    clients.clear;
+    clients.clear();
 
     ctx.status = 200;
     ctx.body = 'Published'
